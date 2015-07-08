@@ -1,0 +1,44 @@
+# import required libraries
+import csv
+import numpy
+
+# initialize dictionary to keep track of the number of times each word
+#   appears throughout the set of tweets
+# initialize list to keept track of the number of unique words per tweet
+wordCountDict = {}
+uniqueWordCount = []
+
+# open 'tweets.txt' for reading
+# delimit individual words using whitespace
+with open('tweets.txt') as tweets:
+    reader = csv.reader(tweets, delimiter = ' ')
+# open (or create if it does not already exist) 'ft2.txt' for writing
+    with open('ft2.txt', 'w') as ft2:
+        for row in reader:
+# initialize (or reset) list to keep track of the unique words per tweet
+            uniqueWords = []
+            for word in row:
+# if the word has already appeared in the set of tweets then increment
+#   the word count by one, otherwise add the word to the dictionary and
+#   set its word count to one
+                if word in wordCountDict.keys():
+                    wordCountDict[word] += 1
+                else:
+                    wordCountDict[word] = 1
+# if the word has not yet appeared in this tweet then add it to the list
+#   of unique words for this tweet
+                if word not in uniqueWords:
+                    uniqueWords.append(word)
+# calculate the number of unique words in this tweet and append it to
+#   the end of the unique word count list
+# recalculate the median value of the unique word count list and write
+#   it to 'ft2.txt'
+            uniqueWordCount.append(len(uniqueWords))
+            ft2.write(str(numpy.median(uniqueWordCount)) + '\n')
+
+# open (or create if it does not already exist) 'ft1.txt' for writing
+with open('ft1.txt', 'w') as ft1:
+# sort the dictionary and write each word along with its respective word
+#   count to 'ft1.txt'
+    for key, value in sorted(wordCountDict.items()):
+        ft1.write(key + ' ' + str(value) + '\n')
