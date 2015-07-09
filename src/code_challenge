@@ -11,10 +11,10 @@ uniqueWordCount = []
 
 # open 'tweets.txt' for reading
 # delimit individual words using whitespace
-with open(sys.argv[0]) as tweets:
+with open(sys.argv[1]) as tweets:
     reader = csv.reader(tweets, delimiter = ' ')
 # open (or create if it does not already exist) 'ft2.txt' for writing
-    with open(sys.argv[2], 'w') as ft2:
+    with open(sys.argv[3], 'w') as ft2:
         for row in reader:
 # initialize (or reset) list to keep track of the unique words per tweet
             uniqueWords = []
@@ -38,7 +38,7 @@ with open(sys.argv[0]) as tweets:
             ft2.write(str(numpy.median(uniqueWordCount)) + '\n')
 
 # open (or create if it does not already exist) 'ft1.txt' for writing
-with open(sys.argv[0], 'w') as ft1:
+with open(sys.argv[2], 'w') as ft1:
 # sort the dictionary and write each word along with its respective word
 #   count to 'ft1.txt'
     for key, value in sorted(wordCountDict.items()):
