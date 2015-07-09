@@ -35,7 +35,7 @@ with open(sys.argv[1]) as tweets:
 # recalculate the median value of the unique word count list and write
 #   it to 'ft2.txt'
             uniqueWordCount.append(len(uniqueWords))
-            ft2.write(str(numpy.median(uniqueWordCount)) + '\n')
+            ft2.write('{0:.2f}'.format(numpy.median(uniqueWordCount)) + '\n')
 
 # open (or create if it does not already exist) 'ft1.txt' for writing
 with open(sys.argv[2], 'w') as ft1:
